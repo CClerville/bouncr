@@ -21,6 +21,20 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
+
+    <!-- Esri -->
+    <script src="lib/angular-esri-map@2.0.0-beta.1"></script>
+    <script type="text/javascript">
+        angular.module('esri-map-example', ['esri.map'])
+            .controller('MapController', function(esriLoader) {
+                var self = this;
+                esriLoader.require(['esri/Map'], function(Map) {
+                    self.map = new Map({
+                        basemap: 'streets'
+                    });
+                });
+            });
+    </script>
   </head>
 
   <body ng-app="starter">
