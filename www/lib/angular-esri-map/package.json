@@ -1,0 +1,119 @@
+{
+  "name": "angular-esri-map",
+  "version": "1.1.2",
+  "description": "A collection of directives to help you use Esri maps and services in your Angular applications",
+  "main": "dist/angular-esri-map.js",
+  "dependencies": {},
+  "devDependencies": {
+    "angular": "^1.4.7",
+    "angular-mocks": "^1.4.7",
+    "browser-sync": "~1.6.1",
+    "chai": "^3.4.1",
+    "eslint": "^1.9.0",
+    "gh-release": "^2.0.1",
+    "gulp": "^3.8.9",
+    "gulp-angular-protractor": "~0.0.2",
+    "gulp-clean": "~0.3.0",
+    "gulp-concat": "~2.2.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-gh-pages": "^0.4.0",
+    "gulp-ng-annotate": "^0.3.3",
+    "gulp-ngdocs": "^0.2.13",
+    "gulp-rename": "~1.2.0",
+    "gulp-strip-debug": "~0.3.0",
+    "gulp-uglify": "~0.3.0",
+    "gulp-util": "~2.2.16",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.15",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-coverage": "^0.5.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "phantomjs": "^1.9.18",
+    "protractor": "~2.2.0",
+    "run-sequence": "~0.3.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Esri/angular-esri-map.git"
+  },
+  "keywords": [
+    "Angular",
+    "Esri"
+  ],
+  "author": {
+    "name": "Tom Wayson",
+    "email": "twayson@esri.com",
+    "url": "http://tomwayson.com"
+  },
+  "contributors": [
+    {
+      "name": "Javier Abadía",
+      "email": "javier.abadia@esri.es",
+      "url": "https://github.com/jabadia"
+    },
+    {
+      "name": "Dave Bouwman",
+      "email": "DBouwman@esri.com",
+      "url": "https://github.com/dbouwman"
+    },
+    {
+      "name": "Patrick Arlt",
+      "email": "parlt@esri.com",
+      "url": "http://patrickarlt.com"
+    },
+    {
+      "name": "Matt Priour",
+      "email": "mpriour@esr.com",
+      "url": "https://github.com/mpriour"
+    },
+    {
+      "name": "Jacob Wasilkowski",
+      "email": "JWasilkowski@esri.com",
+      "url": "https://github.com/jwasil"
+    },
+    {
+      "name": "Tom Wayson",
+      "email": "twayson@esri.com",
+      "url": "http://tomwayson.com"
+    }
+  ],
+  "license": "Apache",
+  "bugs": {
+    "url": "https://github.com/Esri/angular-esri-map/issues"
+  },
+  "homepage": "https://github.com/Esri/angular-esri-map",
+  "scripts": {
+    "build": "gulp build",
+    "test": "karma start test/unit/karma.conf.js --browsers Firefox --single-run",
+    "release": "./scripts/release.sh",
+    "start": "gulp"
+  },
+  "gitHead": "1ef3b5f189b61f9684a412338dfeb00a5f9dda2a",
+  "_id": "angular-esri-map@1.1.2",
+  "_shasum": "2dd7b5408c81b0f812e0d2eea70ccbe717412d1a",
+  "_from": "angular-esri-map@*",
+  "_npmVersion": "2.14.12",
+  "_nodeVersion": "4.2.4",
+  "_npmUser": {
+    "name": "tomwayson",
+    "email": "tom@tomwayson.com"
+  },
+  "maintainers": [
+    {
+      "name": "tomwayson",
+      "email": "tom@tomwayson.com"
+    }
+  ],
+  "dist": {
+    "shasum": "2dd7b5408c81b0f812e0d2eea70ccbe717412d1a",
+    "tarball": "http://registry.npmjs.org/angular-esri-map/-/angular-esri-map-1.1.2.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-5-east.internal.npmjs.com",
+    "tmp": "tmp/angular-esri-map-1.1.2.tgz_1455474448991_0.47418132424354553"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/angular-esri-map/-/angular-esri-map-1.1.2.tgz"
+}

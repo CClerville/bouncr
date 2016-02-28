@@ -8,6 +8,8 @@
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
@@ -15,15 +17,220 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+    <script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+    <!-- Firebase Simple Login -->
+    <script src="https://cdn.firebase.com/js/simple-login/1.6.2/firebase-simple-login.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.js"></script>
+
+    <script src="lib/googlemaps.js"></script>
+
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-    <!-- your app's js -->
+<!--     <script src="//js.arcgis.com/4.0beta3/"></script>
+    <script src="lib/angular-esri-map/dist/angular-esri-core.min.js"></script>
+    <script src="lib/angular-esri-map/dist/angular-esri-map.min.js"></script> -->
+
+
+    <!-- login -->
+    <!-- <script src="js/login/login.module.js"></script> -->
+    <!-- <script src="js/login/Login.js"></script> -->
+
+    <!-- bouncers -->
+    <!-- <script src="js/bouncers/bouncers.module.js"></script> -->
+    <!-- <script src="js/bouncers/Bouncers.js"></script> -->
+
+    <!-- clubs -->
+    <!-- <script src="js/clubs/clubs.module.js"></script> -->
+    <!-- <script src="js/clubs/Clubs.js"></script> -->
+
+    <!-- profile -->
+    <!-- <script src="js/profile/profile.module.js"></script> -->
+    <!-- <script src="js/profile/Profile.js"></script> -->
+
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
+
   </head>
 
-  <body ng-app="starter">
+  <body ng-app="bouncr">
+
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+             
     <ion-nav-view></ion-nav-view>
+
+    <script id="cluber.html" type="text/ng-template">
+      <ion-tabs class="tabs-icon-top tabs-positive">
+
+        <ion-tab title="Bouncers" icon-on="ion-ios-body" icon-off="ion-ios-body-outline" ui-sref="cluber.bouncers">
+          <ion-nav-view name="bouncers-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="Clubs" icon-on="ion-ios-pint" icon-off="ion-ios-pint-outline" ui-sref="cluber.clubs">
+          <ion-nav-view name="clubs-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="Profile" icon-on="ion-ios-person" icon-off="ion-ios-person-outline" ui-sref="cluber.profile">
+          <ion-nav-view name="profile-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="About" icon-on="ion-ios-information" icon-off="ion-ios-information-outline" ui-sref="cluber.about">
+          <ion-nav-view name="about-tab"></ion-nav-view>
+        </ion-tab>
+
+      </ion-tabs>
+    </script>
+
+    
+    <script id="bouncers.html" type="text/ng-template">
+      <ion-view view-title="Bouncers" class="">
+        <ion-nav-title>Bouncers</ion-nav-title>
+        <ion-content class="padding">
+            <div class="list card">
+
+              <div class="item item-avatar" ng-repeat="b in bouncersVm.bouncers">
+                <img src="{{b.avatar}}">
+                <h2>{{b.name}}</h2>
+                <p>{{b.location.name}}</p>
+                <i class="icon ion-location bouncr-loc"> {{b.location.address}}</i>
+                <p><i class="icon ion-cash"> {{b.price}}</i></p>
+                <p><i class="icon ion-ios-people subscriptions"> {{b.subscriptions}}</i></p>
+                <button class="button button-small button-assertive">
+                <i class="icon ion-ios-people subscriptions"></i>
+                  subscribe
+                </button>
+              </div>
+
+            </div>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="clubs.html" type="text/ng-template">
+      <ion-view view-title="Clubs">
+        <ion-content class="padding">
+            <div ng-class="{ 'item club-map-container': !!clubsVm.map}">
+                <div id="clubs-map" data-tap-disabled="false"></div>
+            </div>
+
+            <div class="list card" ng-if="clubsVm.clubs">
+
+              <div class="item item-avatar" ng-repeat="c in clubsVm.clubs">
+                <img src="{{c.icon}}">
+                <h2>{{c.name}}</h2>
+                <p><i class="ion-android-favorite"></i> Rating {{c.rating || 'N/A'}}</p>
+                <i class="icon ion-location bouncr-loc"> {{c.vicinity}}</i>
+                <p><button class="button button-small button-assertive">
+                <!-- <i class="icon ion-ios-people subscriptions"></i> -->
+                  Uber
+                </button>
+                <button class="button button-small button-assertive">
+                <!-- <i class="icon ion-ios-people subscriptions"></i> -->
+                  Lyft
+                </button></p>
+                
+              </div>
+
+            </div>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="profile.html" type="text/ng-template">
+      <ion-view view-title="Profile" class="club-bg-view">
+        <ion-content class="padding">
+
+            <div class="card profile-info">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">First Name</span>
+                <input type="text" placeholder="{{profileVm.user.firstname}}">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Last Name</span>
+                <input type="text" placeholder="{{profileVm.user.lastname}}">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Email</span>
+                <input type="text" placeholder="{{profileVm.user.email}}">
+              </label>
+
+               <button class="button button-full button-positive ion-compose icon-right">
+                  Save
+              </button>
+
+            </div>           
+
+            <div class="card profile-info">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Current Password</span>
+                <input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">New Password</span>
+                <input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;">
+              </label>
+            
+
+            <button class="button button-full button-positive ion-compose icon-right">
+                  Save
+              </button>
+            </div>
+
+            
+
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="about.html" type="text/ng-template">
+      <ion-view view-title="About">
+        <ion-content class="padding">
+            <div class="list card">
+
+              <div>The About page</div>
+
+            </div>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="login.html" type="text/ng-template">
+        <ion-view view-title="Login" class="login-bg-view" hide-nav-bar="true">
+            <ion-content class="padding" scroll="false">
+              <section class="login-container">
+                <div class = "button-row">
+                    <img src="./img/facebook-button.png" ng-click="showModal()"/>
+                </div>
+              </section>
+            </ion-content>
+        </ion-view>
+    </script>
+
+    <script id="user-role-modal.html" type="text/ng-template">
+      <ion-modal-view class="club-bg-view">
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">I Am A</h1>
+        </ion-header-bar>
+        <ion-content>
+            <div class="card">
+                <div class="item">
+                    <button class="button button-block button-outline button-assertive" ng-click="closeModal('bouncer')">
+                      Bouncer
+                    </button>
+                    <button class="button button-block button-outline button-positive" ng-click="closeModal('cluber')">
+                      Cluber
+                    </button>
+                </div>
+                
+            </div>
+                
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
   </body>
 </html>
