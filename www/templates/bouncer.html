@@ -1,13 +1,27 @@
-<ion-view view-title="Bouncer">
-	<h2>Vector Tiles</h2>
+<!-- <ion-view view-title="Bouncer">
+	<ion-content class="padding">
+		<h2>Vector Tiles</h2>
 
-	<esri-map-view map="vm.map" 
-	    view-options="{
-	        zoom: 10,
-	        center: [-100.33, 25.69]
-	    }">
-	</esri-map-view>
-</ion-view>
+		<esri-map-view map="vm.map" 
+		    view-options="{
+		        zoom: 10,
+		        center: [-100.33, 25.69]
+		    }">
+		</esri-map-view> -->
+    
+    <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
+      <ion-tab title="Bouncer" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline" href="#/bouncer/bouncer-btab">
+        <ion-nav-view name="bouncer-btab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="Clubber" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline" href="#/bouncer/bouncer-ctab">
+        <ion-nav-view name="bouncer-ctab"></ion-nav-view>
+      </ion-tab>
+
+    </ion-tabs>    
+	<!-- </ion-content>
+</ion-view> -->
 
 <!--
 .state('tabs.home', {

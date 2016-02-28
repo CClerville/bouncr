@@ -70,17 +70,33 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
   .state('bouncer', {
     url: '/bouncer',
+    abstract: true,
+    templateUrl: 'templates/bouncer.html'
+  })
+  .state('bouncer.bouncer-tab', {
+    url: '/bouncer-btab',
     views: {
-      'menuContent': {
-        templateUrl: 'templates/bouncer.html'
+      'bouncer-btab': {
+        templateUrl: 'templates/bouncer-btab.html',
+        controller: 'BouncerCtrl'
+      }
+    }
+  })
+  .state('bouncer.clubber-tab', {
+    url: '/bouncer-ctab',
+    views: {
+      'bouncer-ctab': {
+        templateUrl: 'templates/bouncer-ctab.html',
+        controller: 'BouncerCtrl'
       }
     }
   })
   .state('clubber', {
     url: '/clubber',
     views: {
-      'menuContent': {
-        templateUrl: 'templates/clubber.html'
+      'clubber-tab': {
+        templateUrl: 'templates/clubber.html',
+        controller: 'ClubberCtrl'
       }
     }
   });
