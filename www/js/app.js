@@ -24,15 +24,42 @@ angular.module('bouncr', ['ionic', 'bouncr.controllers', 'firebase'])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
+    /* Bouncer Views */
     .state('bouncer', {
-      url: 'bouncer',
+      url: '/bouncer',
       abstract: true,
       templateUrl: 'bouncer.html'
     })
-    .state('bouncer.subscription', {
-      url: '/subscription',
-      templateUrl: 'subscription.html'
+    .state('bouncer.checkin', {
+      url: '/checkin',
+      views: {
+        'checkin-tab': {
+          templateUrl: 'checkin.html',
+          controller: 'CheckInController',
+          contrllerAs: 'checkinVm'
+        }
+      }
     })
+    .state('bouncer.profile', {
+      url: '/bouncer-profile',
+      views: {
+        'profile-tab': {
+          templateUrl: 'bouncer-profile.html',
+          controller: 'ProfileController',
+          controllerAs: 'profileVm'
+        }
+      }
+    })
+    .state('bouncer.about', {
+      url: '/about',
+      views: {
+        'about-tab':{
+          templateUrl: 'about.html'
+        }
+      }
+    })
+
+    /* Cluber Views */
     .state('cluber', {
       url: "/cluber",
       abstract: true,
@@ -59,10 +86,10 @@ angular.module('bouncr', ['ionic', 'bouncr.controllers', 'firebase'])
       }
     })
     .state('cluber.profile', {
-      url: "/profile",
+      url: "/cluber-profile",
       views: {
         'profile-tab': {
-          templateUrl: "profile.html",
+          templateUrl: "cluber-profile.html",
           controller: 'ProfileController',
           controllerAs: 'profileVm'
         }
@@ -92,7 +119,12 @@ angular.module('bouncr', ['ionic', 'bouncr.controllers', 'firebase'])
 .controller('ProfileController',  ProfileController)
 .controller('ClubsController',  ClubsController)
 .controller('AboutController',  AboutController)
+.controller('CheckInController', CheckInController)
 .factory('userService', userService);
+
+function CheckInController(){
+  vm = this;
+}
 
 function userService(){
   var USER = {};
@@ -138,7 +170,7 @@ function LoginController($scope, $ionicModal, $rootScope, $firebase, $firebaseSi
     $scope.modal.hide();
 
     if( userRole === 'bouncer' ) {
-
+      $state.go('bouncer.checkin');
     } else if (userRole === 'cluber') {
       $state.go('cluber.bouncers');
     }
@@ -255,7 +287,7 @@ function ClubsController($ionicLoading){
 
         var mapOptions = {
           center: LatLng,
-          zoom: 11,
+          zoom: 12,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
